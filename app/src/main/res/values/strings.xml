@@ -6,4 +6,7 @@
     <string name="empty_string">0</string>
     <string name="pln_to_usd">PLN to USD</string>
     <string name="usd_to_pln">USD to PLN</string>
+    <string name="info">info</string>
+    <string name="actual_currency">Actual Currency</string>
+    <string name="back">Back</string>
 </resources>
