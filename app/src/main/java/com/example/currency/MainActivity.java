@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     public Button info;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     public Switch switchBox;
+    double currPlnToUsd = 0.27;
+    double currUsdToPln = 3.65;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
             String value = inputField.getText().toString();
             float convert_result = Float.parseFloat(value);
             if(switchState) {
-                convert_result *= 3.65;
+                convert_result *= currUsdToPln;
             }
             else {
-                convert_result *= 0.27;
+                convert_result *= currPlnToUsd;
             }
             resultText.setText(String.valueOf(convert_result));
         });
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         info.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this,
                     ActivityInfo2.class);
+            intent.putExtra("currUsdToPln", currUsdToPln);
+            intent.putExtra("currPlnToUsd", currPlnToUsd);
             startActivity(intent);
         });
     }
