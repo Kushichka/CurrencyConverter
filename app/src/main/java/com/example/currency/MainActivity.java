@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     double currPlnToUsd = 0.27;
     double currUsdToPln = 3.65;
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +37,20 @@ public class MainActivity extends AppCompatActivity {
         convert.setOnClickListener(v -> {
             boolean switchState = switchBox.isChecked();
             String value = inputField.getText().toString();
-            float convert_result = Float.parseFloat(value);
-            if(switchState) {
-                convert_result *= currUsdToPln;
+            if(value.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Input a value, please", Toast.LENGTH_LONG).show();
+                inputField.setError("This field cannot be empty");
             }
             else {
-                convert_result *= currPlnToUsd;
+                float convert_result = Float.parseFloat(value);
+                if(switchState) {
+                    convert_result *= currUsdToPln;
+                }
+                else {
+                    convert_result *= currPlnToUsd;
+                }
+                resultText.setText(String.format("%,.2f", convert_result));
             }
-            resultText.setText(String.valueOf(convert_result));
         });
 
         info.setOnClickListener(v -> {
